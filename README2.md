@@ -5,7 +5,19 @@
     
 # Introduction  and Laravel 12 Install
 # Setup Admin Themes
+    Remove Public URL, Database Connection & Download Admin Themes 
+        Remove code and paste in root
+        Theme Adminn
+            https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
 # Login - Admin and User
+        Main  to create the login cconcept
+        Create  the AAuth  Controller via terminal
+        php artisan make:controller Auth/LoginController
+        UI - email and password
+
+        Find
+            assests/
+            {{ asset('')}}/assets/
 # Middleware 
 # Roles
     Create By Admin
@@ -25,4 +37,6 @@
     Product
     Setting
     Logout
+
+# 
     
