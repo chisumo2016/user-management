@@ -9,7 +9,7 @@
         Remove code and paste in root
         Theme Adminn
             https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-# Login - Admin and User
+# Login - Admin and User (Authentication)
         Main  to create the login cconcept
         Create  the AAuth  Controller via terminal
         php artisan make:controller Auth/LoginController
@@ -18,7 +18,11 @@
         Find
             assests/
             {{ asset('')}}/assets/
+
+        One  the user is logged will be redirectted to dashboard 
+
 # Middleware 
+    php artisan make:controller Admin/DashboardController
 # Roles
     Create By Admin
     Permission Setup Inside Roles
