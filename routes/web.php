@@ -12,4 +12,10 @@ Route::get('/', function () {
 Route::get('login',  [LoginController::class, 'login']);
 Route::post('login', [LoginController::class, 'store'])->name('login');
 
-Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+

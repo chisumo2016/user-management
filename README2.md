@@ -21,8 +21,13 @@
 
         One  the user is logged will be redirectted to dashboard 
 
-# Middleware 
+# Admin Themes Setup 
     php artisan make:controller Admin/DashboardController
+
+# Middleware 
+    Restric the  access on accessing the url iif ur not login
+    php artisan make:middleware  AdminUserMiddleware
+
 # Roles
     Create By Admin
     Permission Setup Inside Roles

@@ -14,7 +14,11 @@ class LoginController extends Controller
     {
        //dd(Hash::make('password'));
 
+        if (!empty(Auth::check())) {
+            return redirect()->route('dashboard');
+        }
         return view('auth.login');
+
     }
 
     public function store(Request $request)
@@ -44,5 +48,12 @@ class LoginController extends Controller
         } else {
             return redirect()->back()->with('error', "Please enter correct email and password");  // Use a translatable error message
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+        //return redirect(url(''));
     }
 }
