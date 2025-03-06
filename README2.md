@@ -179,3 +179,10 @@
                 return redirect()->back()->with('success' , "Permission added to Role successfully");
         
             }
+
+# Create the  USER  CRUD operations 
+    Assign role to a particcular user.
+       v<option value="{{ $role->id }}">{{$role->name}}</option>
+
+    model_has_roles (user_has_roles)
+        

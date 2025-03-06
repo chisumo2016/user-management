@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -22,7 +24,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //$roles = Role::get();
+        $roles = Role::pluck('name', 'name')->all(); //associative array
+        return view('admin.user.create',compact('roles'));
     }
 
     /**
@@ -30,7 +34,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:6|max:20',
+            'roles' => 'required',
+        ]);
+
+        $user = User::create([
+             'name' => $request->name,
+             'email' => $request->email,
+             'password' => Hash::make($request->name),
+        ]);
+
+        $user->syncRoles($request->roles); //['writer', 'admin']
+
+        return redirect()->route('user.index')->with('success', 'User created successfully with roles.');
     }
 
     /**

@@ -31,15 +31,6 @@ Route::group(['middleware' => 'useradmin'], function () {
     Route::get('admin/role/{role}/give-permission', [RoleController::class, 'givePermission'])->name('role.give-permission');
     Route::put('admin/role/{role}/give-permission', [RoleController::class, 'givePermissionToRole'])->name('role.update-permission');
 
-    //Route::resource('users', UserController::class);
-
-    Route::get('admin/user', [UserController::class, 'index'])->name('user.index');
-    Route::get('admin/user/create', [UserController::class, 'create'])->name('user.create');
-    Route::post('admin/user', [UserController::class, 'store'])->name('user.store');
-    Route::get('admin/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('admin/user/{user}', [UserController::class, 'update'])->name('user.update');
-    Route::delete('admin/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-
 
     //Route::resource('permissions', PermissionController::class);
 
@@ -49,6 +40,15 @@ Route::group(['middleware' => 'useradmin'], function () {
     Route::get('admin/permissions/{permission}/edit', [PermissionController::class, 'edit'])->name('permission.edit');
     Route::put('admin/permissions/{permission}', [PermissionController::class, 'update'])->name('permission.update');
     Route::delete('admin/permissions/{permission}', [PermissionController::class, 'destroy'])->name('permission.destroy');
+
+    //Route::resource('users', UserController::class);
+
+    Route::get('admin/users', [UserController::class, 'index'])->name('user.index');
+    Route::get('admin/users/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('admin/users', [UserController::class, 'store'])->name('user.store');
+    Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('admin/permissions/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('admin/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 

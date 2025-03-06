@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
+    @include('admin.nav-link')
     <div class="pagetitle">
         <h1>Users</h1>
 
@@ -27,6 +28,8 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Roles</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -36,6 +39,14 @@
                                 <tr>
                                     <th scope="row">{{ $user->id }}</th>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @if(!empty($user->getRoleNames()))
+                                            @foreach($user->getRoleNames()  as $roleName)
+                                                <label for="" class="badge bg-primary mx-2 ">{{ $roleName }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
                                         <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-primary">Edit</a>
@@ -44,7 +55,7 @@
                                         <form action="{{ route('user.destroy', $user) }}" method="POST" style="display:inline;"  onsubmit="confirmDelete(event)">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger mx-2">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
