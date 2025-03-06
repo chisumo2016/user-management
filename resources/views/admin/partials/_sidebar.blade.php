@@ -29,7 +29,7 @@
                 </li><!-- End Profile Page Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#">
+                    <a class="nav-link  @if(Request::segment(2)  != 'permission') collapse @endif" href="{{ route('permission.index') }}">
                         <i class="bi bi-person"></i>
                         <span>Permission</span>
                     </a>

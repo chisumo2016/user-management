@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,6 +36,18 @@ Route::group(['middleware' => 'useradmin'], function () {
     Route::get('admin/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('admin/user/{user}', [UserController::class, 'update'])->name('user.update');
     Route::delete('admin/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+
+    //Route::resource('permissions', PermissionController::class);
+
+    Route::get('admin/permissions', [PermissionController::class, 'index'])->name('permission.index');
+    Route::get('admin/permissions/create', [PermissionController::class, 'create'])->name('permission.create');
+    Route::post('admin/permissions', [PermissionController::class, 'store'])->name('permission.store');
+    Route::get('admin/permissions/{permission}/edit', [PermissionController::class, 'edit'])->name('permission.edit');
+    Route::put('admin/permissions/{permission}', [PermissionController::class, 'update'])->name('permission.update');
+    Route::delete('admin/permissions/{permission}', [PermissionController::class, 'destroy'])->name('permission.destroy');
 });
+
+
 
 

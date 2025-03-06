@@ -2,7 +2,24 @@
     https://developer.intacct.com/entity-relationship-diagrams/users-roles-groups-permissions/
     https://laraveldaily.com/lesson/laravel-vue-inertia-food-delivery/users-roles-permissions
     https://github.com/spatie/laravel-permission
-    
+    https://www.youtube.com/watch?v=uUzym4XxXlc
+
+    ADMIN  - admin role
+                        create  the post
+                        delete  the post
+                        edot  the post
+    USER   - user role
+                        - See the  testd
+                        - See the  project
+    Manager  - employer role
+                            - See the  dashboard
+
+
+    1:Permission
+    2:Role
+
+
+
 # Introduction  and Laravel 12 Install
 # Setup Admin Themes
     Remove Public URL, Database Connection & Download Admin Themes 
@@ -43,7 +60,7 @@
                <span>Roles - {{ Request::segment(1) }} </span>
 
 
-    Add Pages on side bar
+    Add Pages on side bar and  Views Page 
     
         Dashboardd
         User
@@ -60,7 +77,39 @@
     Make views for each pages
         php artisan make:view users.index
 
-# Create User  By Admin  and  Assign Roles
+#   Role based Permissions
+    what permission is available based on role eeg admin, user , employer
+       Dashboard
+
+        User
+            add-user
+            edit-user
+            delete-user
+
+        Roles
+            add-role
+            edit-role
+            delete-role
+
+        Category
+            add-category
+            edit-category
+            delete-category
+
+        Sub Category
+            add-Sub Category
+            edit-Sub Category
+            delete-USub Category
+
+        Product
+            add-product
+            edit-product
+            delete-product
+
+        Setting
+        Logout
+
+# Adding the permission to the ROLE AS MAIN CONCEPT
 # Permission wise Show Menu
 # Access Permission Wise Page  eg links
 

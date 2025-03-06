@@ -21,8 +21,12 @@ class RoleUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $permission = $this->route('permission'); // Get permission from the route
+
+
+
         return [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:permissions,name,'. ($permission?->id ?? 'NULL'),
         ];
     }
 }

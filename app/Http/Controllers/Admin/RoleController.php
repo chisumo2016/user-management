@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleStoreRequest;
 use App\Http\Requests\Admin\RoleUpdateRequest;
 use App\Models\Role;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -32,6 +32,7 @@ class RoleController extends Controller
     public function store(RoleStoreRequest  $request)
     {
         $validated = $request->validated();
+        $validated['guard_name'] = $validated['guard_name'] ?? 'web';
 
         Role::create($validated);
 
@@ -52,6 +53,7 @@ class RoleController extends Controller
      */
     public function update(RoleUpdateRequest $request, Role $role)
     {
+        //dd($request->route('permission'));
         $validated = $request->validated();
 
         $role->update($validated);
