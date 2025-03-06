@@ -41,8 +41,8 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Roles</label>
                                 <div class="col-sm-4">
-                                    <select class="form-select" name="roles[]" aria-label="Default select example">
-                                        <option selected>Select Role</option>
+                                    <select class="form-select" name="roles[]" aria-label="Default select example" multiple>
+                                        <option value="">Select Role</option>
                                         @foreach($roles as $role)
                                             <option value="{{ $role }}">{{$role}}</option>
                                         @endforeach

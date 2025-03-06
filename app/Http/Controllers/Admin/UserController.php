@@ -44,7 +44,7 @@ class UserController extends Controller
         $user = User::create([
              'name' => $request->name,
              'email' => $request->email,
-             'password' => Hash::make($request->name),
+             'password' => Hash::make($request->password),
         ]);
 
         $user->syncRoles($request->roles); //['writer', 'admin']
@@ -63,24 +63,53 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::pluck('name', 'name')->all(); //associative array
+        $userRoles  = $user->roles->pluck('name', 'name')->all();  // doc $user->roles
+
+        return view('admin.user.edit', compact('user',  'roles' ,'userRoles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'nullable|string|min:6|max:20',
+            'roles' => 'required',
+        ]);
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ];
+
+        if (!empty($request->password)) {
+            //$data['password'] = Hash::make($request->password);  //+=
+            $data += [
+                'password' => Hash::make($request->password),
+            ];
+        }
+
+        $user->update($data);
+
+        //Update the Roles
+        $user->syncRoles($request->roles);
+
+        return redirect()->route('user.index')->with('success', 'User updated successfully with roles.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('user.index')->with('success', 'User deleted successfully with roles.');
     }
 }

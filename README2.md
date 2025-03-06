@@ -181,8 +181,14 @@
             }
 
 # Create the  USER  CRUD operations 
+    Fetch the user with their roles
+    Add new user and assign the roles to particulr user
+    Edit/Update user and assign the roles to particulr user
     Assign role to a particcular user.
        v<option value="{{ $role->id }}">{{$role->name}}</option>
 
     model_has_roles (user_has_roles)
+
+    Edit the  uuser with particular roles
+    
         
