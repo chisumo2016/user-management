@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleStoreRequest;
 use App\Http\Requests\Admin\RoleUpdateRequest;
-use App\Models\Role;
+use App\Models\Permission;
+
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -72,6 +75,38 @@ class RoleController extends Controller
 
         return redirect()
             ->route('role.index');
+
+    }
+
+    //Add permission
+    public function givePermission(Role $role)
+    {
+        //$permissions = \Spatie\Permission\Models\Permission::all();
+        //dd($permissions);
+
+        $permissions = Permission::all(); //get
+        $rolePermissions = \DB::table('role_has_permissions')
+            ->where('role_has_permissions.role_id' ,$role->id)
+            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+            ->all();
+        return view('admin.role.add-permission', compact('role', 'permissions','rolePermissions')); //key and value
+    }
+
+    public function givePermissionToRole(Request $request, Role $role) //$roleId
+    {
+        //dd($request->all(),  $role);
+        $request->validate([
+            'permission' => 'required|array',
+        ]);
+
+       // dd($request->permission);  //Check if the permissions are coming as an array
+
+        // Retrieve the Role model using the ID
+        //$role = Role::findOrFail($roleId);
+
+        $role->syncPermissions($request->permission); //input checkbox
+
+        return redirect()->back()->with('success' , "Permission added to Role successfully");
 
     }
 }

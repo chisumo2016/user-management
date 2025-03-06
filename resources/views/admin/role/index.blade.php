@@ -38,6 +38,8 @@
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->created_at }}</td>
                                     <td>
+                                        <a href="{{ route('role.give-permission', $role->id) }}" class="btn btn-sm btn-primary">Add / Edit Role Permission</a>
+{{--                                        <a href="{{ url('roles/'.$role->id .'/give-permission') }}" class="btn btn-sm btn-primary">Add / Edit Role Permission</a>--}}
                                         <a href="{{ route('role.edit', $role) }}" class="btn btn-sm btn-primary">Edit</a>
 {{--                                        <a href="{{ route('roles.destroy', $role) }}" class="btn btn-sm btn-danger">Delete</a>--}}
 

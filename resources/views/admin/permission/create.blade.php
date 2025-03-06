@@ -3,7 +3,7 @@
 @section('content')
     <div class="pagetitle">
         <h1>
-            Add New Role
+            Add New  Permissions
             <a href="{{ route('permission.index') }}" class="btn btn-primary float-end">Back</a>
         </h1>
     </div><!-- End Page Title -->

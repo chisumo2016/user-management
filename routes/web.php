@@ -28,6 +28,9 @@ Route::group(['middleware' => 'useradmin'], function () {
     Route::put('admin/role/{role}', [RoleController::class, 'update'])->name('role.update');
     Route::delete('admin/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
 
+    Route::get('admin/role/{role}/give-permission', [RoleController::class, 'givePermission'])->name('role.give-permission');
+    Route::put('admin/role/{role}/give-permission', [RoleController::class, 'givePermissionToRole'])->name('role.update-permission');
+
     //Route::resource('users', UserController::class);
 
     Route::get('admin/user', [UserController::class, 'index'])->name('user.index');

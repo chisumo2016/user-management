@@ -110,6 +110,8 @@
         Logout
 
 # Adding the permission to the ROLE AS MAIN CONCEPT
+
+
 # Permission wise Show Menu
 # Access Permission Wise Page  eg links
 
@@ -127,5 +129,53 @@
 
     NB: We pages to show permission
 
-# 
-    
+#  Assign Permission to Role  (Role_has_permission) find in database
+        permission_id             role_id
+      Role: Super-admin
+                .create-role
+                .view-role
+                .edit-role
+                .delete-role
+
+
+     Call to a member function syncPermissions() on string
+        This error occurs because $role is a string (ID) instead of an actual Role model instance.
+
+     Call to undefined method App\Models\Role::syncPermissions()
+        Solution to add  trait in Role Model    use HasPermissions;
+
+     - Create a new file called resources/views/admin/role/add-permission.blade.php
+     - Add the route  URRL 
+                 Route::get('admin/role/{role}/give-permission', [RoleController::class, 'givePermission'])->name('role.give-permission');
+                 Route::put('admin/role/{role}/give-permission', [RoleController::class, 'givePermissionToRole'])->name('role.update-permission');
+     - Add logic to RoleController
+            public function givePermission(Role $role)
+            {
+                //$permissions = \Spatie\Permission\Models\Permission::all();
+                //dd($permissions);
+        
+                $permissions = Permission::all(); //get
+                $rolePermissions = \DB::table('role_has_permissions')
+                    ->where('role_has_permissions.role_id' ,$role->id)
+                    ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+                    ->all();
+                return view('admin.role.add-permission', compact('role', 'permissions','rolePermissions')); //key and value
+            }
+        
+            public function givePermissionToRole(Request $request, Role $role) //$roleId
+            {
+                //dd($request->all(),  $role);
+                $request->validate([
+                    'permission' => 'required|array',
+                ]);
+        
+               // dd($request->permission);  //Check if the permissions are coming as an array
+        
+                // Retrieve the Role model using the ID
+                //$role = Role::findOrFail($roleId);
+        
+                $role->syncPermissions($request->permission); //input checkbox
+        
+                return redirect()->back()->with('success' , "Permission added to Role successfully");
+        
+            }
