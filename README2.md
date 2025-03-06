@@ -190,5 +190,7 @@
     model_has_roles (user_has_roles)
 
     Edit the  uuser with particular roles
+
+# USAGE OF ROLES AND PERMISSIONS
     
         
