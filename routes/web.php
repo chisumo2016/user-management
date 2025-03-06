@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,15 @@ Route::group(['middleware' => 'useradmin'], function () {
     Route::get('admin/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
     Route::put('admin/role/{role}', [RoleController::class, 'update'])->name('role.update');
     Route::delete('admin/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+
+    //Route::resource('users', UserController::class);
+
+    Route::get('admin/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('admin/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('admin/user', [UserController::class, 'store'])->name('user.store');
+    Route::get('admin/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('admin/user/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('admin/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 

@@ -37,6 +37,29 @@
     php artisan make:request  Admin/RoleUpdateRequest
     Create By Admin
     Permission Setup Inside Roles
+
+# Active Class in Menu
+    to use the segments to show the active class
+               <span>Roles - {{ Request::segment(1) }} </span>
+
+
+    Add Pages on side bar
+    
+        Dashboardd
+        User
+        Roles
+        Category
+        Sub Category
+        Product
+        Setting
+        Logout
+
+
+    Add routes for all pages in web routes
+
+    Make views for each pages
+        php artisan make:view users.index
+
 # Create User  By Admin  and  Assign Roles
 # Permission wise Show Menu
 # Access Permission Wise Page  eg links
@@ -52,6 +75,8 @@
     Product
     Setting
     Logout
+
+    NB: We pages to show permission
 
 # 
     
