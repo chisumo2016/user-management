@@ -27,8 +27,14 @@
 # Middleware 
     Restric the  access on accessing the url iif ur not login
     php artisan make:middleware  AdminUserMiddleware
+    Register  middleware
+    Write  the logic in middlware in  class
+    Add the middlware in web route
 
-# Roles
+# Roles - CRUD 
+    php artisan migrate:rollback --step=1
+    php artisan make:request  Admin/RoleStoreRequest
+    php artisan make:request  Admin/RoleUpdateRequest
     Create By Admin
     Permission Setup Inside Roles
 # Create User  By Admin  and  Assign Roles

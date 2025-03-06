@@ -26,6 +26,11 @@
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
+    <!-- Include SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.19/dist/sweetalert2.min.css" rel="stylesheet">
+
+
+
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     @yield('style')
@@ -39,7 +44,9 @@
 <!-- ======= Sidebar ======= -->
 @include('admin.partials._sidebar')
 
-<main id="main" class="main">
+
+<main id="main" class="main" style="height: 100vh;">
+    @include('message._message')
 @yield('content')
 </main><!-- End #main -->
 
@@ -58,8 +65,32 @@
 <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
 
+<!-- Include SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.19/dist/sweetalert2.min.js"></script>
+
 <!-- Template Main JS File -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
+
+<script>
+    function confirmDelete(event) {
+        event.preventDefault();  // Prevent form submission until confirmed
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit the form if confirmed
+                event.target.submit();
+            }
+        });
+    }
+</script>
+
 @yield('script')
 </body>
 
