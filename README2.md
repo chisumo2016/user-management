@@ -286,6 +286,8 @@
                         return [
                 
                 
+                           new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('view-role'), only:['index','show']),
+                           new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('create-role'), only:['create','store']),
                            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('update-role'), only:['update','edit']),
                             new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete-role'), only:['destroy']),
                         ];

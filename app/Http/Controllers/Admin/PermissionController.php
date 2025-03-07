@@ -5,9 +5,21 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PermissionController extends Controller
+class PermissionController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('view-permission'), only:['index','show']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('create-permission'), only:['create','store']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('update-permission'), only:['update','edit']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete-permission'), only:['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
