@@ -5,11 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('view-user'), only:['index']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('create-user'), only:['create','store']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('update-user'), only:['update','edit']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete-user'), only:['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

@@ -119,7 +119,10 @@ class RoleController extends Controller implements HasMiddleware
         // Retrieve the Role model using the ID
         //$role = Role::findOrFail($roleId);
 
-        $role->syncPermissions($request->permission); //input checkbox
+        // Debugging role and permissions
+        ///dd($role, $request->permission);
+
+        $role->syncPermissions($request->permission);; //input checkbox
 
         return redirect()->back()->with('success' , "Permission added to Role successfully");
 

@@ -292,7 +292,14 @@
                             new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete-role'), only:['destroy']),
                         ];
                     }
-        
+
+#  Clear Permission Cache
+        If everything is correct but the changes are not reflecting in the database, reset the permission cache:
+                php artisan cache:clear
+                php artisan config:clear
+                php artisan route:clear
+                php artisan permission:cache-reset
+
 #  Blade Directives
 
 
