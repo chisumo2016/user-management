@@ -191,6 +191,109 @@
 
     Edit the  uuser with particular roles
 
-# USAGE OF ROLES AND PERMISSIONS
+# USAGE OF ROLES AND PERMISSIONS INTO OUR APPLICATIONS
+
+    How to use, manage and protect routes with Middleware using roles & permissions.
+    Route group middlware, Route middleware, Middleware via Controller.
+
+
+    We will see how to use these Roles and Permissionss to MANAGE  and PROTECT the routes in the Laravel application .
+
+    So basically , PROTECTING ROUTES means when a user is  trying  to access a certain route , to which he doesnt have 
+    permission, then we will not allow the user to access the route/page .
+
+    For Example :
+
+            If a user's ROLE is staff , he/she cannot delete the product .
+            He can only create and update a produuct.
+            He doesn't have PERMISSION to delete the  product reccord
+
+    Protect our routes  and  check if its authenticcated
+
+    These roles are given to particular user .
+
+#  Custom Admin Middleware via Route.
+        https://spatie.be/docs/laravel-permission/v6/basic-usage/middleware
+     If the logged user is SUPER ADMIN he/she can accesss the following routes
+            Route::group(['middleware' => 'useradmin'], function () {
+                    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+                    //Route::resource('roles', RoleController::class);
+                
+                    Route::get('admin/role', [RoleController::class, 'index'])->name('role.index');
+                    Route::get('admin/role/create', [RoleController::class, 'create'])->name('role.create');
+                    Route::post('admin/role', [RoleController::class, 'store'])->name('role.store');
+                    Route::get('admin/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
+                    Route::put('admin/role/{role}', [RoleController::class, 'update'])->name('role.update');
+                    Route::delete('admin/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+                
+                    Route::get('admin/role/{role}/give-permission', [RoleController::class, 'givePermission'])->name('role.give-permission');
+                    Route::put('admin/role/{role}/give-permission', [RoleController::class, 'givePermissionToRole'])->name('role.update-permission');
+                
+                
+                    //Route::resource('permissions', PermissionController::class);
+                
+                    Route::get('admin/permissions', [PermissionController::class, 'index'])->name('permission.index');
+                    Route::get('admin/permissions/create', [PermissionController::class, 'create'])->name('permission.create');
+                    Route::post('admin/permissions', [PermissionController::class, 'store'])->name('permission.store');
+                    Route::get('admin/permissions/{permission}/edit', [PermissionController::class, 'edit'])->name('permission.edit');
+                    Route::put('admin/permissions/{permission}', [PermissionController::class, 'update'])->name('permission.update');
+                    Route::delete('admin/permissions/{permission}', [PermissionController::class, 'destroy'])->name('permission.destroy');
+                
+                    //Route::resource('users', UserController::class);
+                
+                    Route::get('admin/users', [UserController::class, 'index'])->name('user.index');
+                    Route::get('admin/users/create', [UserController::class, 'create'])->name('user.create');
+                    Route::post('admin/users', [UserController::class, 'store'])->name('user.store');
+                    Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+                    Route::put('admin/permissions/{user}', [UserController::class, 'update'])->name('user.update');
+                    Route::delete('admin/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+                });
+
+        
+        Single permission
+            Route::group(['middleware' => ['can:publish articles']], function () { ... });
+
+            In Laravel 11 open /bootstrap/app.php and register them there:In Laravel 11 open /bootstrap/app.php and register them there:
+                    ->withMiddleware(function (Middleware $middleware) {
+                        $middleware->alias([
+                            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+                            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+                            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+                        ]);
+                    })
+
+#    Using Middleware in Routes and Controllers
+        After you have registered the aliases as shown above, you can use them in your Routes and Controllers much the same way you use any other middleware:
+
+        # Routes
+            Route::group(['middleware' => ['role:manager']], function () { ... });
+            Route::group(['middleware' => ['permission:publish articles']], function () { ... });
+            Route::group(['middleware' => ['role_or_permission:publish articles']], function () { ... });
+
+        Protecting te route using ROLES AND PERMISSION
+                Route::group(['middleware' => ['useradmin', 'role:super-admin|admin']], function () {
+                        Route::delete('admin/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy')->middleware('permission:delete-role');
+                });
+                
+        Set the  permission to  a particular route .
+
+        How can u add the middlware in resource  route ?
+            Route::resource('users', UserController::class);
+            In Controllers
+
+                   public static function middleware(): array
+                    {
+                        return [
+                
+                
+                           new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('update-role'), only:['update','edit']),
+                            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete-role'), only:['destroy']),
+                        ];
+                    }
+        
+#  Blade Directives
+
+
+        
     
         

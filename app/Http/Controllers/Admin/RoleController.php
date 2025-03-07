@@ -8,10 +8,24 @@ use App\Http\Requests\Admin\RoleUpdateRequest;
 use App\Models\Permission;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller
+class RoleController extends Controller implements HasMiddleware
 {
+
+    public static function middleware(): array
+    {
+        return [
+
+
+           new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('update-role'), only:['update','edit']),
+            new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete-role'), only:['destroy']),
+        ];
+    }
+
+
     /**
      * Display a listing of the resource.
      */

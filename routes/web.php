@@ -17,7 +17,7 @@ Route::post('login', [LoginController::class, 'store'])->name('login');
 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => 'useradmin'], function () {
+Route::group(['middleware' => ['useradmin', 'role:super-admin|admin']], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //Route::resource('roles', RoleController::class);
 
