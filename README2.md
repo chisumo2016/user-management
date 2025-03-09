@@ -212,7 +212,7 @@
 
     These roles are given to particular user .
 
-#  Custom Admin Middleware via Route.
+#    Using Middleware in Routes and Controllers
         https://spatie.be/docs/laravel-permission/v6/basic-usage/middleware
      If the logged user is SUPER ADMIN he/she can accesss the following routes
             Route::group(['middleware' => 'useradmin'], function () {
@@ -262,7 +262,7 @@
                         ]);
                     })
 
-#    Using Middleware in Routes and Controllers
+
         After you have registered the aliases as shown above, you can use them in your Routes and Controllers much the same way you use any other middleware:
 
         # Routes
@@ -300,6 +300,24 @@
                 php artisan route:clear
                 php artisan permission:cache-reset
 
+
+#    #  Custom Admin Middleware via Route.
+        php artisan make:middleware  AdminMiddleware
+
+                public function handle(Request $request, Closure $next): Response
+                    {
+                        //Checking the static role
+                        if (Auth::check()) {
+                            if (Auth::user()->role == 'admin') {  //->hasRole('admin')
+                                return $next($request);
+                            }
+                            abort(403, 'Unauthorized action.');
+                        }
+                        abort(401, 'Unauthorized action.');
+                    }
+
+        Let us the role and  permission
+            
 #  Blade Directives
 
 

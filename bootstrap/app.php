@@ -12,7 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
          $middleware->alias([
-             'useradmin' => \App\Http\Middleware\AdminUserMiddleware::class,
+             'userAdmin' => \App\Http\Middleware\AdminUserMiddleware::class,
+             'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
 
              'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
              'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
