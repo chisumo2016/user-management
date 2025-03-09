@@ -49,14 +49,18 @@
                                     </td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
-                                        <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        @can('edit-user')
+                                            a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        @endcan
+                                        <
                                         {{--                                        <a href="{{ route('roles.destroy', $role) }}" class="btn btn-sm btn-danger">Delete</a>--}}
-
-                                        <form action="{{ route('user.destroy', $user) }}" method="POST" style="display:inline;"  onsubmit="confirmDelete(event)">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger mx-2">Delete</button>
-                                        </form>
+                                            @can('delete-user')
+                                                <form action="{{ route('user.destroy', $user) }}" method="POST" style="display:inline;"  onsubmit="confirmDelete(event)">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger mx-2">Delete</button>
+                                                </form>
+                                            @endcan
                                     </td>
                                 </tr>
                             @endforeach

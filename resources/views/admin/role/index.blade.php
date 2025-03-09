@@ -40,14 +40,20 @@
                                     <td>
                                         <a href="{{ route('role.give-permission', $role->id) }}" class="btn btn-sm btn-primary">Add / Edit Role Permission</a>
 {{--                                        <a href="{{ url('roles/'.$role->id .'/give-permission') }}" class="btn btn-sm btn-primary">Add / Edit Role Permission</a>--}}
-                                        <a href="{{ route('role.edit', $role) }}" class="btn btn-sm btn-primary">Edit</a>
+
+                                        @can('update-role')
+                                            <a href="{{ route('role.edit', $role) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        @endcan
+
 {{--                                        <a href="{{ route('roles.destroy', $role) }}" class="btn btn-sm btn-danger">Delete</a>--}}
 
-                                        <form action="{{ route('role.destroy', $role) }}" method="POST" style="display:inline;"  onsubmit="confirmDelete(event)">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
+                                        @can('delete-role')
+                                            <form action="{{ route('role.destroy', $role) }}" method="POST" style="display:inline;"  onsubmit="confirmDelete(event)">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

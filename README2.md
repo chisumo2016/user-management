@@ -318,7 +318,80 @@
 
         Let us the role and  permission
             
-#  Blade Directives
+#  Blade Directives  in Roles and Permission
+        https://spatie.be/docs/laravel-permission/v6/basic-usage/blade-directives
+    If the  authenticated user doesnt a permission edit/ delete  , we will hide the button .
+    
+    PERMISSIION DIRECTIVES
+            @can('edit articles')
+                //
+            @endcan
+
+             @can('only used for permission')
+                //
+            @endcan
+
+    ROLES DIRECTIVES
+            @role('only used for permission')
+                I am a writer!
+            @else
+                I am not a writer...
+            @endrole
+
+             @role('WRITER')
+                I am a writer!
+            @else
+                I am not a writer...
+            @endrole
+
+
+    Can be applied into blade file resources/views/admin/role/index.blade.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+                    
+
+
+
+
+
+
+
+
+
+
 
 
         

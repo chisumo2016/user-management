@@ -39,14 +39,19 @@
                                     <td>{{ $permission->name }}</td>
                                     <td>{{ $permission->created_at }}</td>
                                     <td>
-                                        <a href="{{ route('permission.edit', $permission) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        @can('update-permission')
+                                            <a href="{{ route('permission.edit', $permission) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        @endcan
+
 {{--                                        <a href="{{ route('roles.destroy', $role) }}" class="btn btn-sm btn-danger">Delete</a>--}}
 
-                                        <form action="{{ route('permission.destroy', $permission) }}" method="POST" style="display:inline;"  onsubmit="confirmDelete(event)">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
+                                            @can('delete-permission')
+                                                <form action="{{ route('permission.destroy', $permission) }}" method="POST" style="display:inline;"  onsubmit="confirmDelete(event)">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            @endcan
                                     </td>
                                 </tr>
                             @endforeach
