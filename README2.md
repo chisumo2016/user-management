@@ -1,4 +1,8 @@
 # LARAVEL 12 ROLES AND PERMISSION 
+        Install Spatie Package and create Permission CRUD, Roles CRUD, Assign/Add Permissions to a Role, and User CRUD with attaching roles to it. 
+        How to use these Roles and Permissions to manage and protect the routes in the Laravel application.
+        Protecting routes means when a user is trying to access a certain route, to which he does not have role or permission, then we will not allow the user to access that route/page.
+
     https://developer.intacct.com/entity-relationship-diagrams/users-roles-groups-permissions/
     https://laraveldaily.com/lesson/laravel-vue-inertia-food-delivery/users-roles-permissions
     https://github.com/spatie/laravel-permission
