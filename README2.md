@@ -6,7 +6,7 @@
     https://developer.intacct.com/entity-relationship-diagrams/users-roles-groups-permissions/
     https://laraveldaily.com/lesson/laravel-vue-inertia-food-delivery/users-roles-permissions
     https://github.com/spatie/laravel-permission
-    https://www.youtube.com/watch?v=uUzym4XxXlc
+    https://www.youtube.com/watch?v=uUzym4XxXlc    - DOCKER
 
     ADMIN  - admin role
                         create  the post

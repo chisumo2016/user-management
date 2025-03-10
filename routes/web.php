@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\StudentController;
@@ -55,16 +56,19 @@ Route::group(['middleware' => ['isAdmin']], function () {
 
 
     /*Student CRUD*/
-    Route::resource('student', StudentController::class);
+    Route::resource('admin/student', StudentController::class);
+
+    /*Student CRUD*/
+        //Route::get('students', [StudentController::class, 'index'])->name('student.index');
+        //Route::get('create-student', [StudentController::class, 'create'])->name('student.create');
+        //Route::post('store-student', [StudentController::class, 'store'])->name('student.store');
+        //Route::get('edit-student/{student}', [StudentController::class, 'edit'])->name('student.edit');
+        //Route::put('update-student/{student}', [StudentController::class, 'update'])->name('student.update');
+        //Route::delete('delete-student/{student}', [StudentController::class, 'destroy'])->name('student.delete');
 });
 
-  /*Student CRUD*/
-//Route::get('students', [StudentController::class, 'index'])->name('student.index');
-//Route::get('create-student', [StudentController::class, 'create'])->name('student.create');
-//Route::post('store-student', [StudentController::class, 'store'])->name('student.store');
-//Route::get('edit-student/{student}', [StudentController::class, 'edit'])->name('student.edit');
-//Route::put('update-student/{student}', [StudentController::class, 'update'])->name('student.update');
-//Route::delete('delete-student/{student}', [StudentController::class, 'destroy'])->name('student.delete');
+
+
 
 
 
