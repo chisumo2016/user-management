@@ -49,4 +49,41 @@ class StudentController extends Controller
          return redirect()->route('student.index')->with('success', 'Student Added Successfully');
 
     }
+
+    public function edit(Student $student)
+    {
+        return view('admin.student.edit', compact('student'));
+    }
+
+    public function update(Request $request, Student $student)
+    {
+        if ($request->hasFile('avatar')) {
+
+            /** Delete the old image*/
+            $destinationPath = 'uploads/students/' .$student->avatar;
+            if (file_exists($destinationPath)) {
+                unlink($destinationPath);
+            }
+
+            $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/students/', $filename); //public/uploads/students
+
+
+
+
+            //$student->avatar  = $filename; //save into database
+        }
+
+        $student->update([
+                $student->name = $request->input('name'),
+                $student->email = $request->input('email'),
+                $student->course = $request->input('course'),
+                $student->avatar = $filename,
+                $student->save()
+            ]);
+            return redirect()->route('student.index')->with('success', 'Student updated Successfully');
+
+    }
 }
