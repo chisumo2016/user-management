@@ -57,6 +57,7 @@ Route::group(['middleware' => ['isAdmin']], function () {
   /*Student CRUD*/
 Route::get('students', [StudentController::class, 'index'])->name('student.index');
 Route::get('add-student', [StudentController::class, 'create'])->name('student.create');
+Route::post('add-student', [StudentController::class, 'store'])->name('student.store');
 
 
 

@@ -15,7 +15,7 @@
                         <a href="{{ route('student.index') }}" class="btn btn-success float-end">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('student.store')  }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-3">
                                 <label for="">Student Name</label>

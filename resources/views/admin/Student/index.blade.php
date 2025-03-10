@@ -9,6 +9,7 @@
     <section class="section">
         <div class="row">
             <div class="col-md-12">
+                @include('message._message')
                 <div class="card">
                     <div class="card-header">
                         <h4>Image Crud</h4>
