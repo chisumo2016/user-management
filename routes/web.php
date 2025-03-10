@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -52,6 +53,10 @@ Route::group(['middleware' => ['isAdmin']], function () {
     Route::put('admin/permissions/{user}', [UserController::class, 'update'])->name('user.update');
     Route::delete('admin/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 });
+
+  /*Student CRUD*/
+Route::get('students', [StudentController::class, 'index'])->name('student.index');
+Route::get('add-student', [StudentController::class, 'create'])->name('student.create');
 
 
 
