@@ -9,7 +9,6 @@
     <section class="section">
         <div class="row">
             <div class="col-md-12">
-                @include('message._message')
                 <div class="card">
                     <div class="card-header">
                         <h4>Image Crud</h4>
@@ -39,7 +38,11 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('student.edit', $student) }}" class="btn btn-primary btn-sm">edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                        <form action="{{ route('student.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this student?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -51,4 +54,10 @@
         </div>
     </section>
 @endsection
+
+
+
+
+
+
 

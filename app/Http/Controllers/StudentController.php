@@ -71,8 +71,6 @@ class StudentController extends Controller
             $file->move('uploads/students/', $filename); //public/uploads/students
 
 
-
-
             //$student->avatar  = $filename; //save into database
         }
 
@@ -84,6 +82,16 @@ class StudentController extends Controller
                 $student->save()
             ]);
             return redirect()->route('student.index')->with('success', 'Student updated Successfully');
+    }
 
+    public function destroy(Student $student)
+    {
+        $student->delete();
+
+        $destinationPath = 'uploads/students/' .$student->avatar;
+        if (file_exists($destinationPath)) {  //File::exists
+            unlink($destinationPath);
+        }
+        return redirect()->route('student.index')->with('success', 'Student deleted Successfully');
     }
 }

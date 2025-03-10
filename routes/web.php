@@ -52,14 +52,20 @@ Route::group(['middleware' => ['isAdmin']], function () {
     Route::get('admin/users/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('admin/permissions/{user}', [UserController::class, 'update'])->name('user.update');
     Route::delete('admin/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+
+    /*Student CRUD*/
+    Route::resource('student', StudentController::class);
 });
 
   /*Student CRUD*/
-Route::get('students', [StudentController::class, 'index'])->name('student.index');
-Route::get('add-student', [StudentController::class, 'create'])->name('student.create');
-Route::post('add-student', [StudentController::class, 'store'])->name('student.store');
-Route::get('add-student/{student}', [StudentController::class, 'edit'])->name('student.edit');
-Route::put('add-student/{student}', [StudentController::class, 'update'])->name('student.update');
+//Route::get('students', [StudentController::class, 'index'])->name('student.index');
+//Route::get('create-student', [StudentController::class, 'create'])->name('student.create');
+//Route::post('store-student', [StudentController::class, 'store'])->name('student.store');
+//Route::get('edit-student/{student}', [StudentController::class, 'edit'])->name('student.edit');
+//Route::put('update-student/{student}', [StudentController::class, 'update'])->name('student.update');
+//Route::delete('delete-student/{student}', [StudentController::class, 'destroy'])->name('student.delete');
+
 
 
 
