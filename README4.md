@@ -295,8 +295,33 @@
                         }
 
 
+# HOW  MIDDLEWARE  WORKS IN LARAVEL
+    bootstrap/app.php
+    Think middlware as series of filters or layers that requests must pass through before reaching your application.
+    Sit in between your requests and controllers allowing you to inspect modify annd even stop requests based on certain criiterias
+        eg bootstrap/app.php
 
+             ->withMiddleware(function (Middleware $middleware) {
+                 $middleware->alias([
+                     'userAdmin' => \App\Http\Middleware\AdminUserMiddleware::class,
+                     'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
+        
+                     'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+                     'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+                     'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+                 ]);
+    })
+        
+            Types of arrays
+                array_map
+                array_values
+                array_filter
+                array_diff
+                array_unique
+                array_merge
 
+    php artisan make:middleware  AssignRequestId
+          Route::resource('admin/student', StudentController::class)->middleware(CheckUserRole::class);
 
 
 

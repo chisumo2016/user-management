@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
+        /*Customs Middleware**/
          $middleware->alias([
              'userAdmin' => \App\Http\Middleware\AdminUserMiddleware::class,
              'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,

@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminMiddleware
 {
@@ -33,5 +34,7 @@ class AdminMiddleware
         }
 
         abort('403');
+        //return  response(status: 404);
+        //throw new NotFoundHttpException();
     }
 }
